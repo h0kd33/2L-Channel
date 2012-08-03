@@ -36,7 +36,7 @@ class FileIO{
 		$this->IFS = new IndexFS($ENV['IFS.LOG']); // IndexFS 物件
 		$this->IFS->openIndex();
 		register_shutdown_function(array($this, '_ftp_close')); // 設定解構元 (PHP 結束前執行)
-		set_time_limit(120); // 執行時間 120 秒 (FTP 傳輸過程可能很長)
+		//set_time_limit(120); // 執行時間 120 秒 (FTP 傳輸過程可能很長)
 		$this->thumbLocalPath = $ENV['PATH'].$ENV['THUMB']; // 預覽圖本機位置
 		$this->parameter = $parameter;
 		/*

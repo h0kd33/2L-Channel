@@ -13,7 +13,7 @@ class mod_archiver{
 		$PMS->hookModuleMethod('ModulePage', __CLASS__); // 向系統登記模組專屬獨立頁面
 		$this->page = $PMS->getModulePageURL(__CLASS__);
 
-		$this->ARCHIVE_ROOT = './archives/'; // 生成靜態庫存頁面之存放位置
+		$this->ARCHIVE_ROOT = '../../archives/'; // 生成靜態庫存頁面之存放位置
 		$this->MULTI_COPY = true; // 容許同一串有多份存檔
 		$this->ADMIN_ONLY = true; // 只容許管理員生成靜態庫存頁面
 

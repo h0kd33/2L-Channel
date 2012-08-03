@@ -28,7 +28,7 @@ if(typeof ActiveXObject!='undefined'){
 
 <div id="footer">
 <!-- Pixmicat! -->
-<small>- <a href="http://pixmicat.openfoundry.org/" rel="_blank">Pixmicat!</a> -</small>
+<small>- <a href="http://2lime.tk/" rel="_blank">@Lime!</a> -</small>
 </div>
 
 </body>

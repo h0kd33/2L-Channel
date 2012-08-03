@@ -13,10 +13,6 @@ class mod_bbcode{
 		$this->URLTagMode = 1; // [url]標籤行為 (0:不轉換 1:正常)
 		$this->MaxURLCount = 2; // [url]標籤上限 (超過上限時標籤為陷阱標籤[寫入至$URLTrapLog])
 		$this->URLTrapLog = './URLTrap.log'; // [url]陷阱標籤記錄檔
-
-		if(method_exists($PMS,'addCHP')) {
-			$PMS->addCHP('mod_bbbutton_addButtons',array($this,'_addButtons'));
-		}
 	}
 
 	function getModuleName(){
@@ -24,7 +20,7 @@ class mod_bbcode{
 	}
 
 	function getModuleVersionInfo(){
-		return '6th.Release-dev (v110319)';
+		return '4th.Release.2 (v071109)';
 	}
 
 	function autoHookPostInfo(&$postinfo){
@@ -33,21 +29,6 @@ class mod_bbcode{
 
 	function autoHookRegistBeforeCommit(&$name, &$email, &$sub, &$com, &$category, &$age, $dest, $resto, $imgWH){
 		$com = $this->_bb2html($com,$dest);
-	}
-
-	function _addButtons($txt) {
-		$txt .= 'bbbuttons.tags = $.extend({
-			 b:{desc:"Bold"},
-			 i:{desc:"Italic"},
-			 u:{desc:"Underline"},
-			 p:{desc:"Paragraph"},
-			 color:{desc:"Color", prompt:{prompt:"Enter Color:",def:""}},
-			 pre:{desc:"Pre-formatted text"},
-			 quote:{desc:"Quotation"},
-			 email:{desc:"Insert e-mail address"},
-			 '.($this->URLTagMode?'url:{desc:"Insert URL"},':'').'
-			 '.($this->ImgTagTagMode?'img:{desc:"Insert Image"},':'').'
-			},bbbuttons.tags);';
 	}
 
 	function _bb2html($string, $dest){
@@ -78,6 +59,8 @@ class mod_bbcode{
 		if (($this->ImgTagTagMode == 2) || ($this->ImgTagTagMode && !$dest)){
 			$string = preg_replace('#\[img\](([a-z]+?)://([^ \n\r]+?))\[\/img\]#si', '<img src="\1" border="0" alt="\1" />', $string);
 		}
+
+		$string = preg_replace('#\[youtube\](.*?)\[/youtube\]#si', '<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/\1"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\1" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>', $string);
 
 		return $string;
 	}
@@ -137,6 +120,8 @@ class mod_bbcode{
 		$string = preg_replace_callback('#<a href="mailto:(\S+?@\S+?\\.\S+?)">(.*?)</a>#si', array(&$this, '_EMailRevConv'), $string);
 
 		$string = preg_replace('#<img src="(([a-z]+?)://([^ \n\r]+?))" border="0" alt=".*?" />#si', '[img]\1[/img]', $string);
+
+		$string = preg_replace('#<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/(.*?)"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/(.*?)" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>#si', '[youtube]\1[/youtube]', $string);
 	}
 
 
@@ -171,12 +156,12 @@ BBCode 代碼包含一些標籤方便您快速的更改文字的基本形式. �
 
 若一個完整的URL遵照此方式寫入至討論板，將會自動產生一個超連結連往該URL
 <ul><li>http://開頭的會自動成為超連結 (如果自動連結有啟用的話)</li>
-    <li>[url]可以做成一個超連結，請參考下例：<br/>
-                  <b>[url=http://php.s3.to]</b>按這裡<b>[/url]</b></li>
-    <li>下一個方式也有類似效果<br/>
-           <b>[url]</b>php.s3.to<b>[/url]</b>
-        <p>以上舉例說明中，自動產生了連結以刊登URL。使用者按下該連結將跳出一視窗。沒有"http://"是不能自動產生連結的。<br/>第二個方法裡可以省略"http://"。避免於URL中置入「"」記號，那可能會截斷網址。</p>
-    </li></ul>
+	<li>[url]可以做成一個超連結，請參考下例：<br/>
+				  <b>[url=http://php.s3.to]</b>按這裡<b>[/url]</b></li>
+	<li>下一個方式也有類似效果<br/>
+		   <b>[url]</b>php.s3.to<b>[/url]</b>
+		<p>以上舉例說明中，自動產生了連結以刊登URL。使用者按下該連結將跳出一視窗。沒有"http://"是不能自動產生連結的。<br/>第二個方法裡可以省略"http://"。避免於URL中置入「"」記號，那可能會截斷網址。</p>
+	</li></ul>
 為了加上Email的連結，請按照以下方式刊登郵址: 
 <ul><li><b>[email]</b>php@php.4all.cc<b>[/email]</b></li>
 <li>下一個方式也可以做成一個Email連結<br/>

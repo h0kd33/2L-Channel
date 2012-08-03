@@ -21,17 +21,17 @@ http://pixmicat.openfoundry.org/
 */
 /*---- Part 1：程式基本設定 ----*/
 // 伺服器常態設定
-define("PHP_SELF", 'pixmicat.php'); // 主程式名 (若是修改了主程式名，請配合修改)
+define("PHP_SELF", 'limech.php'); // 主程式名 (若是修改了主程式名，請配合修改)
 define("TIME_ZONE", '+8'); // 時區設定 (GMT時區，參照 http://wwp.greenwichmeantime.com/ )
 define("PIXMICAT_LANGUAGE", 'zh_TW'); // 語系語定
 define("HTTP_UPLOAD_DIFF", 50); // HTTP上傳所有位元組與實際位元組之允許誤差值
 ini_set("memory_limit", '128M'); // PHP運行的最大記憶體使用量 (php內定128M/無限:-1)
 
 // FileIO設定
-define("FILEIO_BACKEND", 'normal'); // FileIO後端指定
-define("FILEIO_INDEXLOG", 'fileioindex.dat'); // FileIO索引記錄檔 (儲存在本機端)
-define("FILEIO_PARAMETER", ''); // FileIO參數 (本機端儲存)
-//define("FILEIO_PARAMETER", serialize(array('ftp.example.com', 21, 'demo', 'demo', 'PASV', '/pwd/', 'http://www.example.com/~demo/pwd/', true))); // FileIO參數 (FTP)
+define("FILEIO_BACKEND", 'ftp'); // FileIO後端指定
+define("FILEIO_INDEXLOG", 'limeindex.dat'); // FileIO索引記錄檔 (儲存在本機端)
+//define("FILEIO_PARAMETER", ''); // FileIO參數 (本機端儲存)
+define("FILEIO_PARAMETER", serialize(array('entry.hust.edu.tw', 21, 'bf100018', 'E124435215', 'PASV', '/WWW/limepic/', 'http://entry.hust.edu.tw/~bf100018/limepic/', true))); // FileIO參數 (FTP)
 //define("FILEIO_PARAMETER", serialize(array('00000000000000000000000000000000'))); // FileIO參數 (ImageShack)
 //define("FILEIO_PARAMETER", serialize(array('http://www.example.com/~demo/satellite.cgi', true, '12345678', 'http://www.example.com/~demo/src/', true))); // FileIO參數 (Satellite)
 
@@ -49,18 +49,18 @@ define("PHP_EXT", '.htm'); // 第一頁以後生成檔案之副檔名
 define("TITLE", 'Pixmicat!-PIO'); // 網頁標題
 define("HOME", '../'); // 回首頁的連結
 define("TOP_LINKS", ''); // 頁面右上方的額外連結，請直接以[<a href="網址" rel="_blank">名稱</a>]格式鍵入，如果不需要開新視窗可刪除rel一段
-define("ADMIN_PASS", 'futaba'); // 管理員密碼
-define("IDSEED", 'id種'); // 生成ID之隨機種子
+define("ADMIN_PASS", '20149'); // 管理員密碼
+define("IDSEED", 'Lime種'); // 生成ID之隨機種子
 
 // 管理員キャップ(Cap)設定 (啟用條件：開啟使用；名稱輸入識別名稱，E-mail輸入#啟動密碼)
 define("CAP_ENABLE", 1); // 是否使用管理員キャップ (使用：1 不使用：0)
-define("CAP_NAME", 'futaba'); // 管理員キャップ識別名稱
-define("CAP_PASS", 'futaba'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
+define("CAP_NAME", 'lime'); // 管理員キャップ識別名稱
+define("CAP_PASS", '20149'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
 define("CAP_SUFFIX", ' ★'); // 管理員キャップ後綴字元 (請務必有★以便程式防止偽造，或可自行修改程式的防偽造部份)
 define("CAP_ISHTML", 1); // 管理員キャップ啟動後內文是否接受HTML標籤 (是：1 否：0)
 
 // 功能切換
-define("USE_FLOATFORM", 1); // 新增文章表單使用自動隱藏 (是：1 否：0)
+define("USE_FLOATFORM", 0); // 新增文章表單使用自動隱藏 (是：1 否：0)
 define("USE_SEARCH", 1); // 開放搜尋功能 (是：1 否：0)
 define("USE_UPSERIES", 1); // 是否啟用連貼機能 [開主題後自動指向到主題下以方便連貼] (是：1 否：0)
 define("RESIMG", 1); // 回應附加圖檔機能 (開啟：1 關閉：0)
@@ -77,16 +77,30 @@ define("USE_XHTML", 1); // 是否回傳 XHTML 檔頭讓瀏覽器以更嚴格的�
 
 // 模組載入
 $ModuleList = array();
+$ModuleList[] = 'mod_archiver';
 $ModuleList[] = 'mod_rss';
 $ModuleList[] = 'mod_catalog';
 $ModuleList[] = 'mod_bbbutton';
+$ModuleList[] = 'mod_bbcode';
 $ModuleList[] = 'mod_captcha';
 $ModuleList[] = 'mod_code_prettify';
 $ModuleList[] = 'mod_opentag';
 $ModuleList[] = 'mod_showhide';
+$ModuleList[] = 'mod_captcha';
+$ModuleList[] = 'mod_dummy';
+$ModuleList[] = 'mod_eggpoll';
+$ModuleList[] = 'mod_exif';
+$ModuleList[] = 'mod_ipfilter';
+$ModuleList[] = 'mod_mobile';
+$ModuleList[] = 'mod_neta';
+$ModuleList[] = 'mod_pushpost';
+$ModuleList[] = 'mod_showip';
+$ModuleList[] = 'mod_siokara';
+$ModuleList[] = 'mod_threadlist';
+$ModuleList[] = 'mod_userrepair';
 
 // 封鎖設定
-define("BAN_CHECK", 0); // 綜合性封鎖檢查功能 (關閉：0, 開啟：1)
+define("BAN_CHECK", 1); // 綜合性封鎖檢查功能 (關閉：0, 開啟：1)
 $BANPATTERN = array(); // IP/Hostname封鎖黑名單
 $DNSBLservers = array(0, 'sbl-xbl.spamhaus.org', 'list.dsbl.org', 'bl.blbl.org', 'bl.spamcop.net'); // DNSBL伺服器列表 (首項：使用伺服器個數)
 $DNSBLWHlist = array(); // DNSBL白名單 (請輸入IP位置)
@@ -96,15 +110,15 @@ $BAD_FILEMD5 = array("dummy","dummy2"); // 限制上傳附加圖檔之MD5檢查�
 // 附加圖檔限制
 define("MAX_KB", 2000); // 附加圖檔上傳容量限制KB (php內定為最高2MB)
 define("STORAGE_LIMIT", 1); // 附加圖檔總容量限制功能 (啟動：1 關閉：0)
-define("STORAGE_MAX", 30000); // 附加圖檔總容量限制上限大小 (單位：KB)
+define("STORAGE_MAX", 51200); // 附加圖檔總容量限制上限大小 (單位：KB)
 define("ALLOW_UPLOAD_EXT", 'GIF|JPG|PNG|BMP|SWF'); // 接受之附加圖檔副檔名 (送出前表單檢查用，用 | 分隔)
 
 // 連續投稿時間限制
-define("RENZOKU", 60); // 連續投稿間隔秒數
-define("RENZOKU2", 60); // 連續貼圖間隔秒數
+define("RENZOKU", 10); // 連續投稿間隔秒數
+define("RENZOKU2", 10); // 連續貼圖間隔秒數
 
 // 預覽圖片相關限制
-define("USE_THUMB", 1); // 使用預覽圖機能 (使用：1 不使用：0) [gd, imagemagick, imagick, magickwand, repng2jpeg]
+define("USE_THUMB", gd); // 使用預覽圖機能 (使用：1 不使用：0) [gd, imagemagick, imagick, magickwand, repng2jpeg]
 define("MAX_W", 250); // 討論串本文預覽圖片寬度 (超過則自動縮小)
 define("MAX_H", 250); // 討論串本文預覽圖片高度
 define("MAX_RW", 125); // 討論串回應預覽圖片寬度 (超過則自動縮小)
@@ -129,7 +143,7 @@ define("BR_CHECK", 0); // 文字換行行數上限 (不限：0)
 define("STATIC_HTML_UNTIL", 10); // 更新文章時自動生成的靜態網頁至第幾頁止 (全部生成：-1 僅入口頁：0)
 define("GZIP_COMPRESS_LEVEL", 3); // PHP動態輸出頁面使用Gzip壓縮層級 (關閉：0 啟動：1～9，推薦值：3)
 define("DEFAULT_NOTITLE", '無標題'); // 預設文章標題
-define("DEFAULT_NONAME", '無名氏'); // 預設文章名稱
+define("DEFAULT_NONAME", '無家可歸的小可憐'); // 預設文章名稱
 define("DEFAULT_NOCOMMENT", '無內文'); // 預設文章內文
 
 /*---- Part 3：Anti-SPAM 防止垃圾訊息機器人發文 ----*/
@@ -139,8 +153,8 @@ define("DEFAULT_NOCOMMENT", '無內文'); // 預設文章內文
 另設名稱怪異的欄位為正確欄位，以避免直接的攻擊。
 防止機器人學習的可能，請隔一段時間修改底下欄位值，建議英數大小寫隨機6～10個 (避免特殊符號、第一位不能為數字)。
 */
-define("FT_NAME", 'bvUFbdrIC'); // 名稱欄位
-define("FT_EMAIL", 'ObHGyhdTR'); // E-mail欄位
-define("FT_SUBJECT", 'SJBgiFbhj'); // 標題欄位
-define("FT_COMMENT", 'pOBvrtyJK'); // 內文欄位
+define("FT_NAME", 'bvUCDDrIC'); // 名稱欄位
+define("FT_EMAIL", 'ObHGDSTR'); // E-mail欄位
+define("FT_SUBJECT", 'SJDGEWbhj'); // 標題欄位
+define("FT_COMMENT", 'pOBDASyJK'); // 內文欄位
 ?>

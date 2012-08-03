@@ -33,32 +33,32 @@ class mod_dummy{
 
 	// 以下為 autoHookXXX 的實驗，可以觀察到各常用掛載點是如何操作
 	function autoHookToplink(&$link){
-		$link .= '[<a href="'.$this->SELF.'">統計</a>]'."\n";
+		//$link .= '[<a href="'.$this->SELF.'">統計</a>]'."\n";
 	}
 
 	function autoHookPostInfo(&$txt){
-		$txt .= '<li>目前線上人數：102</li>'."\n";
+		$txt .= '目前板上人數：<script type="text/javascript" src="http://widget.supercounters.com/online_t.js"></script><script type="text/javascript">sc_online_t(262512," Online","000000");</script>'."\n";
 	}
 
 	function autoHookThreadFront(&$txt){
-		$txt .= '<div style="text-align: center;"><a href="#">[AD] 這是廣告#01！</a></div>'."\n";
+		$txt .= '<div style="text-align: center;"><a href="#">[AD] 廣告位置#01！</a></div>'."\n";
 	}
 	
 	function autoHookThreadRear(&$txt){
-		$txt .= '<div style="text-align: center;"><a href="#">[AD] 這是廣告#02！</a></div>'."\n";
+		$txt .= '<div style="text-align: center;"><a href="#">[AD] 廣告位置#02！</a></div>'."\n";
 	}
 
 	function autoHookFoot(&$foot){
-		$foot .= '<span class="warn_txt2">本網站由 雙貓聯合站 提供資源，謹此致謝</span>'."\n";
+		$foot .= '<span class="warn_txt2">@Lime Present. 2012</span>'."\n";
 	}
 
 	/**
 	 * 模組頁面方法
 	 * 
 	 * 此方法為瀏覽 ModulePage URL 之後，程式會呼叫的方法。你可以在此印出屬於模組自己的內容，比如說設定項目，列表等等。
-	 */
-	function ModulePage(){
-		echo "Welcome to my world.";
-	}
+	 *
+	*function ModulePage(){
+	*	echo "Welcome to my world.";
+	*}*/
 }
 ?>
