@@ -55,7 +55,7 @@ define("IDSEED", 'Lime種'); // 生成ID之隨機種子
 // 管理員キャップ(Cap)設定 (啟用條件：開啟使用；名稱輸入識別名稱，E-mail輸入#啟動密碼)
 define("CAP_ENABLE", 1); // 是否使用管理員キャップ (使用：1 不使用：0)
 define("CAP_NAME", 'lime'); // 管理員キャップ識別名稱
-define("CAP_PASS", '20149'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
+define("CAP_PASS", 'password'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
 define("CAP_SUFFIX", ' ★'); // 管理員キャップ後綴字元 (請務必有★以便程式防止偽造，或可自行修改程式的防偽造部份)
 define("CAP_ISHTML", 1); // 管理員キャップ啟動後內文是否接受HTML標籤 (是：1 否：0)
 
