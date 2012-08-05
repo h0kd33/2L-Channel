@@ -31,7 +31,7 @@ ini_set("memory_limit", '128M'); // PHP運行的最大記憶體使用量 (php內
 define("FILEIO_BACKEND", 'ftp'); // FileIO後端指定
 define("FILEIO_INDEXLOG", 'limeindex.dat'); // FileIO索引記錄檔 (儲存在本機端)
 //define("FILEIO_PARAMETER", ''); // FileIO參數 (本機端儲存)
-define("FILEIO_PARAMETER", serialize(array('entry.hust.edu.tw', 21, 'bf100018', 'E124435215', 'PASV', '/WWW/limepic/', 'http://entry.hust.edu.tw/~bf100018/limepic/', true))); // FileIO參數 (FTP)
+define("FILEIO_PARAMETER", serialize(array('2lime.net', 21, 'dev', '123', 'PASV', '/www/img/', 'http://img.2lime.net/', true))); // FileIO參數 (FTP)
 //define("FILEIO_PARAMETER", serialize(array('00000000000000000000000000000000'))); // FileIO參數 (ImageShack)
 //define("FILEIO_PARAMETER", serialize(array('http://www.example.com/~demo/satellite.cgi', true, '12345678', 'http://www.example.com/~demo/src/', true))); // FileIO參數 (Satellite)
 
@@ -42,20 +42,20 @@ define("CONNECTION_STRING", 'sqlite://pixmicat.db/imglog/'); // PIO 連線字串
 //define("CONNECTION_STRING", 'pgsql://pixmicat:1234@localhost/pixmicat_use/imglog/'); // PIO 連線字串 (PostgreSQL)
 
 /*---- Part 2：板面各項細部功能設定 ----*/
-define("IMG_DIR", 'src/'); // 圖片存放目錄
+define("IMG_DIR", '../../img/'); // 圖片存放目錄
 define("THUMB_DIR", 'thumb/'); // 預覽圖存放目錄
 define("PHP_SELF2", 'index.htm'); // 入口檔名
 define("PHP_EXT", '.htm'); // 第一頁以後生成檔案之副檔名
-define("TITLE", 'Pixmicat!-PIO'); // 網頁標題
+define("TITLE", '@Lime - boardname'); // 網頁標題
 define("HOME", '../'); // 回首頁的連結
 define("TOP_LINKS", ''); // 頁面右上方的額外連結，請直接以[<a href="網址" rel="_blank">名稱</a>]格式鍵入，如果不需要開新視窗可刪除rel一段
-define("ADMIN_PASS", '20149'); // 管理員密碼
+define("ADMIN_PASS", '23122'); // 管理員密碼
 define("IDSEED", 'Lime種'); // 生成ID之隨機種子
 
 // 管理員キャップ(Cap)設定 (啟用條件：開啟使用；名稱輸入識別名稱，E-mail輸入#啟動密碼)
 define("CAP_ENABLE", 1); // 是否使用管理員キャップ (使用：1 不使用：0)
-define("CAP_NAME", 'lime'); // 管理員キャップ識別名稱
-define("CAP_PASS", 'password'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
+define("CAP_NAME", 'username'); // 管理員キャップ識別名稱
+define("CAP_PASS", '214555'); // 管理員キャップ啟動密碼 (在E-mail一欄輸入#啟動密碼)
 define("CAP_SUFFIX", ' ★'); // 管理員キャップ後綴字元 (請務必有★以便程式防止偽造，或可自行修改程式的防偽造部份)
 define("CAP_ISHTML", 1); // 管理員キャップ啟動後內文是否接受HTML標籤 (是：1 否：0)
 
@@ -71,20 +71,20 @@ define("DISP_ID", 2); // 顯示ID (強制顯示：2 選擇性顯示：1 永遠�
 define("CLEAR_SAGE", 0); // 使用不推文模式時清除E-mail中的「sage」關鍵字 (是：1 否：0)
 define("USE_QUOTESYSTEM", 1); // 是否打開引用瀏覽系統 [自動轉換>>No.xxx文字成連結並導引] (是：1 否：0)
 define("SHOW_IMGWH", 1); // 是否顯示附加圖檔之原檔長寬尺寸 (是：1 否：0)
-define("USE_CATEGORY", 1); // 是否開啟使用類別標籤分類功能 (是：1 否：0)
+define("USE_CATEGORY", 0); // 是否開啟使用類別標籤分類功能 (是：1 否：0)
 define("USE_RE_CACHE", 1); // 是否使用回應頁面顯示快取功能 (是：1 否：0)
 define("USE_XHTML", 1); // 是否回傳 XHTML 檔頭讓瀏覽器以更嚴格的方式解析 [僅限瀏覽器支援者] (是：1 否：0)
 
 // 模組載入
 $ModuleList = array();
-$ModuleList[] = 'mod_archiver';
+//$ModuleList[] = 'mod_archiver';
 $ModuleList[] = 'mod_rss';
 $ModuleList[] = 'mod_catalog';
 $ModuleList[] = 'mod_bbbutton';
 $ModuleList[] = 'mod_bbcode';
 $ModuleList[] = 'mod_captcha';
 $ModuleList[] = 'mod_code_prettify';
-$ModuleList[] = 'mod_opentag';
+//$ModuleList[] = 'mod_opentag';
 $ModuleList[] = 'mod_showhide';
 $ModuleList[] = 'mod_captcha';
 $ModuleList[] = 'mod_dummy';
@@ -142,9 +142,9 @@ define("COMM_MAX", 2000); // 內文接受Bytes數 (注意：中文字為2Bytes)
 define("BR_CHECK", 0); // 文字換行行數上限 (不限：0)
 define("STATIC_HTML_UNTIL", 10); // 更新文章時自動生成的靜態網頁至第幾頁止 (全部生成：-1 僅入口頁：0)
 define("GZIP_COMPRESS_LEVEL", 3); // PHP動態輸出頁面使用Gzip壓縮層級 (關閉：0 啟動：1～9，推薦值：3)
-define("DEFAULT_NOTITLE", '無標題'); // 預設文章標題
-define("DEFAULT_NONAME", '無家可歸的小可憐'); // 預設文章名稱
-define("DEFAULT_NOCOMMENT", '無內文'); // 預設文章內文
+define("DEFAULT_NOTITLE", 'notitle'); // 預設文章標題
+define("DEFAULT_NONAME", 'nousername'); // 預設文章名稱
+define("DEFAULT_NOCOMMENT", 'nocomment'); // 預設文章內文
 
 /*---- Part 3：Anti-SPAM 防止垃圾訊息機器人發文 ----*/
 /* 欄位陷阱 (Field Trap)
